@@ -1,0 +1,64 @@
+<app-home-header [trendingMovies]="trendingMovies"></app-home-header>
+<div class="container mt-5 mb-5">
+  <app-loader *ngIf="trendingPeople == null || trendingTvShows == null || trendingMovies == null"></app-loader>
+  <!-- movies -->
+  <div class="row mt-5 mb-5 gy-2" *ngIf="trendingMovies">
+    <div class="col-md-4">
+      <div class="header">
+        <h2>Trending <br>Movies <br>to Watch Right Now </h2>
+        <p class="mt-4 text-muted">Most watched movies by days </p>
+        <button type="button" class="btn btn-info" routerLink="/movies">see more</button>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg-2" *ngFor="let movie of trendingMovies; let i = index">
+      <a class="nav-link" [routerLink]="['/details',movie.id,movie.media_type]" [queryParams]="{id:movie.id,media_type:movie.media_type}">
+        <div class="item" *ngIf="i < 10">
+          <img class="w-100" src="{{imagepath + movie.poster_path}}" alt="">
+          <h3 class="h6 pt-3 pb-3">{{movie.title}}</h3>
+          <p>{{movie.vote_average | number : '1.0-1'}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <!-- end movies -->
+  <!-- tv show -->
+  <div class="row mt-5 mb-5 gy-2" *ngIf="trendingTvShows">
+    <div class="col-md-4">
+      <div class="header">
+        <h2>Trending <br>Tv <br>to Watch Right Now </h2>
+        <p class="mt-4 text-muted">Most watched tv by days </p>
+        <button type="button" class="btn btn-info" routerLink="/tv-shows">see more</button>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg-2" *ngFor="let tv of trendingTvShows; let i = index">
+      <a class="nav-link" [routerLink]="['/details',tv.id,tv.media_type]" [queryParams]="{id:tv.id,media_type:tv.media_type}">
+        <div class="item" *ngIf="i < 10">
+          <img class="w-100" src="{{imagepath + tv.poster_path}}" alt="">
+          <h3 class="h6 pt-3 pb-3">{{tv.name}}</h3>
+          <p>{{tv.vote_average | number : '1.0-1'}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <!-- end tv show -->
+  <!-- people -->
+  <div class="row mt-5 mb-5 gy-2" *ngIf="trendingPeople">
+    <div class="col-md-4">
+      <div class="header">
+        <h2>Trending <br>People <br>to Watch Right Now </h2>
+        <p class="mt-4 text-muted">Most watched people by days </p>
+        <button type="button" class="btn btn-info" routerLink="/people">see more</button>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg-2" *ngFor="let person of trendingPeople; let i = index">
+      <a class="nav-link" [routerLink]="['/details',person.id,person.media_type]" [queryParams]="{id:person.id,media_type:person.media_type}">
+        <div class="item" *ngIf="i < 10">
+          <img class="w-100" src="{{imagepath + person.profile_path}}" alt="">
+          <h3 class="h6 pt-3 pb-3">{{person.name}}</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+  <!-- people -->
+</div>
+

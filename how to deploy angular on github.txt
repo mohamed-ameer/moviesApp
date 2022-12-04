@@ -1,0 +1,8 @@
+1- delete the .git file and readme file that already downloaded with angular
+2-git clone '''''''''''''
+3-put the new .git file and readme file on the workspace directly beside the src folder(on the same line with the src folder)
+4-ng build --output-path docs --base-href /repo name/
+5-open docs folder then make 404.html and copy all the code inside the index.html in the 404.html(just make a copy of the index.html then change the name to 404.html)
+6-git add .
+7-git commit -m ""
+8-git push

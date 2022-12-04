@@ -1,0 +1,12 @@
+.form-title
+{
+  font-weight: 200;
+}
+div.container{
+  width:50% !important;
+}
+@media (max-width:800px) {
+  div.container{
+    width:75% !important;
+  }
+}

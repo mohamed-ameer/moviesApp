@@ -1,0 +1,42 @@
+<div class="">
+  <div class="container mt-5">
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm(registerForm)">
+      <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+      <h2 class="form-title mb-2">Registeration Form</h2>
+      <label for="firstName" class="form-label">firstName :</label>
+      <input id="firstName" type="text" class="form-control mb-3" formControlName="first_name">
+      <div  *ngIf="registerForm.get('first_name')?.errors && registerForm.get('first_name')?.touched">
+        <p class="text-danger" *ngIf="registerForm.get('first_name')?.getError('required')">this field is required</p>
+      </div>
+      <label for="lastName" class="form-label">lastName :</label>
+      <input id="lastName" type="text" class="form-control mb-3" formControlName="last_name">
+      <div  *ngIf="registerForm.get('last_name')?.errors && registerForm.get('last_name')?.touched">
+        <p class="text-danger" *ngIf="registerForm.get('last_name')?.getError('required')">this field is required</p>
+      </div>
+      <label for="age" class="form-label">Age :</label>
+      <input id="age" type="number" min="0" class="form-control mb-3" formControlName="age">
+      <div  *ngIf="registerForm.get('age')?.errors && registerForm.get('age')?.touched">
+        <p class="text-danger" *ngIf="registerForm.get('age')?.getError('required')">this field is required</p>
+        <p class="text-danger" *ngIf="registerForm.get('age')?.getError('min')">minimum age is 16 years old</p>
+        <p class="text-danger" *ngIf="registerForm.get('age')?.getError('max')">maximum age is 70 years old</p>
+      </div>
+      <label for="email" class="form-label">email :</label>
+      <input id="email" type="email" class="form-control mb-3" formControlName="email">
+      <div  *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+        <p class="text-danger" *ngIf="registerForm.get('email')?.getError('required')">this field is required</p>
+        <p class="text-danger" *ngIf="registerForm.get('email')?.getError('email')">email must be in this format: example@gmail.com</p>
+      </div>
+      <label for="password" class="form-label">Password :</label>
+      <input id="password" type="password" class="form-control mb-3" formControlName="password">
+      <div  *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+        <p class="text-danger" *ngIf="registerForm.get('password')?.getError('required')">this field is required</p>
+      </div>
+      <div class="submitbtn text-end mt-5">
+        <button type="submit" class="btn btn-info text-white" [disabled]="registerForm.invalid">
+          <span *ngIf="!isLoading">register</span>
+          <i class="fas fa-spinner fa-spin " *ngIf="isLoading"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
