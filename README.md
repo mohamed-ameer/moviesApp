@@ -1,2 +1,2 @@
 # moviesApp
-## link:https://mohamed-ameer.github.io/moviesApp/moviesApp#/home
+## link:https://mohamed-ameer.github.io/moviesApp/#/home
