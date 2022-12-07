@@ -21,12 +21,12 @@ export class AuthService {
     this.userData.next(decodedToken);//===> this.userData = decodedToken;
   }
   signUp(userData:any):Observable<any>{
-    return this._httpClient.post('https://route-egypt-api.herokuapp.com/signup/',userData)
+    return this._httpClient.post('https://route-movies-api.vercel.app/signup/',userData)
   }
   signIn(userData:any):Observable<any>{
-    return this._httpClient.post('https://route-egypt-api.herokuapp.com/signin/',userData)
+    return this._httpClient.post('https://route-movies-api.vercel.app/signin/',userData)
   }
-  signOut(){ 
+  signOut(){
     localStorage.removeItem('userToken');
     this.userData.next(null);
     this._router.navigate(['/login']);
