@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark shadow fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand h1" routerLink="home">Noxe</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/movies">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/tv-shows">Tv show</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/people">People</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/networks">Networks</a>
+        </li> -->
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item">
+            <input class="form-control me-2" type="search" placeholder="Search" (keyup)="searchInput($event)">
+            <div class="list-group position-fixed start-0 end-0 overflow-auto container" style="max-height:400px;" *ngIf="searchResult && !clicked">
+              <a [routerLink]="['/details',result.id,result.media_type]" [queryParams]="{id:result.id,media_type:result.media_type}" class="list-group-item list-group-item-action text-break" *ngFor="let result of searchResult;" (click)="isClicked()">
+                  <div class="item d-flex align-items-center">
+                    <img class="" style="width:80px;" src="{{imagepath + result.poster_path}}" alt="">
+                    <p class="ps-3" *ngIf="result.media_type != 'movie'">{{result.name}}</p>
+                    <p class="ps-3" *ngIf="result.media_type == 'movie'">{{result.title}}</p>
+                  </div>
+              </a>
+              <p-paginator [rows]="10" [totalRecords]="pages * 10" (onPageChange)="paginate($event)" style="background-color:#fff !important;" *ngIf="pages"></p-paginator>
+            </div>
+        </li>
+        <li class="nav-item d-flex align-items-center justify-content-center me-5 ms-5">
+          <a class="nav-link active"><i class="fa-brands fa-facebook me-2"></i></a>
+          <a class="nav-link active"><i class="fa-brands fa-spotify me-2"></i></a>
+          <a class="nav-link active"><i class="fa-brands fa-instagram me-2"></i></a>
+          <a class="nav-link active"><i class="fa-brands fa-youtube "></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/login" *ngIf="!isLogin">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/register" *ngIf="!isLogin">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" *ngIf="isLogin" (click)="signOut()">LogOut</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

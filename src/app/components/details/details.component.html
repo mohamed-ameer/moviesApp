@@ -1,0 +1,75 @@
+<div class="container mt-3 ">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="poster">
+        <a class="nav-link" [href]="detail.homepage" target="_blank">
+          <img class="w-100" [src]="imagepath+detail.poster_path" alt="" *ngIf="media_type != 'person'">
+          <img class="w-100" [src]="imagepath+detail.profile_path" alt="" *ngIf="media_type == 'person'">
+        </a>
+      </div>
+    </div>
+    <div class="col-md-8" *ngIf="media_type != 'person'">
+      <div class="details p-3">
+        <h1 *ngIf="media_type == 'movie'">{{detail.title}}</h1>
+        <h1 *ngIf="media_type == 'tv'">{{detail.name}}</h1>
+        <h2 class="text-muted">{{detail.tagline}}</h2>
+        <div class="genres d-flex flex-wrap gap-4 mt-3 mb-4">
+          <span *ngFor="let genres of detail.genres">{{genres.name}}</span>
+        </div>
+        <div class="info">
+          <p class="pt-2 pb-2">Vote : {{detail.vote_average}}</p>
+          <p class="pt-2 pb-2">Vote Count : {{detail.vote_count}}</p>
+          <p class="pt-2 pb-2">popularity : {{detail.popularity}}</p>
+          <p class="pt-2 pb-2" *ngIf="media_type == 'movie'">release date : {{detail.release_date}}</p>
+          <p class="pt-2 pb-2" *ngIf="media_type == 'tv'">release date : {{detail.first_air_date}}</p>
+        </div>
+        <p class="overview text-muted pt-3">{{detail.overview}}</p>
+      </div>
+    </div>
+    <div class="col-md-8" *ngIf="media_type == 'person'">
+      <div class="details p-3">
+        <h1>{{detail.name}}</h1>
+        <div class="info mt-3">
+          <p class="pt-2 pb-2">birthday : {{detail.birthday}}</p>
+          <p class="pt-2 pb-2">place_of_birth : {{detail.place_of_birth}}</p>
+          <p class="pt-2 pb-2">popularity : {{detail.popularity}}</p>
+        </div>
+        <p class="overview text-muted pt-3">{{detail.biography}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center mt-5 mb-5" *ngIf="media_type != 'person'">
+          <iframe
+    [src]="youtubepath | safe"
+    height="400"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope;"
+    allowfullscreen class="col-sm-10 col-md-8 col-lg-6"></iframe>
+  </div>
+  <div class="row mt-5 mb-5" *ngIf="media_type != 'person' && Recommendations">
+    <h2 class="pt-2 pb-2 ">Recommended {{media_type}} For You</h2>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let recommend of Recommendations; let i = index">
+      <a class="nav-link" [routerLink]="['/details',recommend.id,recommend.media_type]" [queryParams]="{id:recommend.id,media_type:recommend.media_type}" (click)="reset($event)">
+        <div class="item">
+          <img class="w-100" src="{{imagepath + recommend.poster_path}}" alt="">
+          <h3 class="h6 pt-3 pb-3" *ngIf="media_type == 'movie'">{{recommend.title}}</h3>
+          <h3 class="h6 pt-3 pb-3" *ngIf="media_type == 'tv'">{{recommend.name}}</h3>
+          <p>{{recommend.vote_average | number : '1.0-1'}}</p>
+        </div>
+      </a>
+    </div>
+    <p-paginator [rows]="10" [totalRecords]="pages * 10" (onPageChange)="paginate($event)" #p></p-paginator>
+  </div>
+  <!-- person -->
+  <div class="row mt-5 mb-5" *ngIf="media_type == 'person'">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let movie of personMovies; let i = index">
+      <a class="nav-link" [routerLink]="['/details',movie.id,movie.media_type]" [queryParams]="{id:movie.id,media_type:movie.media_type}">
+        <div class="item">
+          <img class="w-100" src="{{imagepath + movie.poster_path}}" alt="">
+          <h3 class="h6 pt-3 pb-3">{{movie.title}}</h3>
+          <p>{{movie.vote_average | number : '1.0-1'}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<section class="home d-flex flex-column justify-content-end">
+  <div class="container">
+    <div><h2 class="header-title">Our Latest Movies</h2></div>
+    <owl-carousel-o [options]="customOptions" >
+      <ng-container *ngFor="let movie of trendingMovies">
+        <ng-template carouselSlide [id]="movie.id">
+          <a class="" [routerLink]="['/details',movie.id,movie.media_type]" [queryParams]="{id:movie.id,media_type:movie.media_type}">
+            <img class="w-100" [src]="imagepath + movie.poster_path" [alt]="movie.overview" [title]="movie.title">
+          </a>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</section>

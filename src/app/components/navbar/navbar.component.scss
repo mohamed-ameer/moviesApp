@@ -1,0 +1,13 @@
+@import "../../../styles.scss";
+.navbar-dark{
+  background-color:$bgColor !important;
+}
+.navbar-brand{
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 900;
+}
+.nav-link{
+  font-size: 20px;
+  font-weight: 200;
+}
